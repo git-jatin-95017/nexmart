@@ -1,0 +1,40 @@
+import Link from 'next/link'
+import { ShoppingCart } from 'lucide-react'
+
+export function Header() {
+  return (
+    <header className="sticky top-0 z-50 w-full border-b bg-white">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between">
+          <Link href="/" className="flex items-center space-x-2">
+            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-indigo-600 to-purple-600" />
+            <span className="text-xl font-bold">Marketplace</span>
+          </Link>
+
+          <nav className="hidden md:flex md:space-x-6">
+            <Link
+              href="/"
+              className="text-sm font-medium text-gray-700 hover:text-gray-900"
+            >
+              Home
+            </Link>
+            <Link
+              href="/categories"
+              className="text-sm font-medium text-gray-700 hover:text-gray-900"
+            >
+              Categories
+            </Link>
+          </nav>
+
+          <Link
+            href="/cart"
+            className="flex items-center space-x-2 rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium hover:bg-gray-200"
+          >
+            <ShoppingCart className="h-5 w-5" />
+            <span className="hidden sm:inline">Cart</span>
+          </Link>
+        </div>
+      </div>
+    </header>
+  )
+}
