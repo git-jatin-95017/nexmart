@@ -31,7 +31,7 @@ export default async function CartPage() {
               </div>
             </div>
 
-            <div className="lg:col-span-1">
+              <div className="lg:col-span-1">
               <div className="rounded-lg border bg-white p-6">
                 <h2 className="text-lg font-semibold text-gray-900">Order Summary</h2>
                 <div className="mt-4 space-y-2">
@@ -39,21 +39,21 @@ export default async function CartPage() {
                     <span className="text-gray-600">
                       Subtotal ({cart.reduce((sum, item) => sum + item.quantity, 0)} items)
                     </span>
-                    <span className="font-medium text-gray-900">${total.toFixed(2)}</span>
+                    <span className="font-medium text-gray-900">₹{total.toFixed(2)}</span>
                   </div>
                 </div>
                 <div className="mt-6 border-t pt-6">
                   <div className="flex justify-between text-lg font-semibold">
-                    <span>Total</span>
-                    <span>${total.toFixed(2)}</span>
+                    <span>Total (INR)</span>
+                    <span>₹{total.toFixed(2)}</span>
                   </div>
                 </div>
-                <button className="mt-6 w-full rounded-lg bg-indigo-600 px-6 py-3 text-white hover:bg-indigo-700">
+                <Link
+                  href="/checkout"
+                  className="mt-6 block w-full rounded-lg bg-indigo-600 px-6 py-3 text-center text-white hover:bg-indigo-700"
+                >
                   Proceed to Checkout
-                </button>
-                <p className="mt-4 text-center text-sm text-gray-500">
-                  Checkout is not implemented in this MVP
-                </p>
+                </Link>
               </div>
             </div>
           </div>
