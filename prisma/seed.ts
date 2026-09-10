@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3'
+import bcrypt from 'bcryptjs'
 
 const adapter = new PrismaBetterSqlite3({ 
   url: process.env.DATABASE_URL || 'file:./prisma/dev.db' 
@@ -8,6 +9,45 @@ const prisma = new PrismaClient({ adapter })
 
 async function main() {
   console.log('🌱 Starting seed...')
+
+  // Create Demo Users
+  const buyerPassword = await bcrypt.hash('buyer123', 10)
+  const buyer = await prisma.user.upsert({
+    where: { email: 'buyer@demo.com' },
+    update: {},
+    create: {
+      name: 'Demo Buyer',
+      email: 'buyer@demo.com',
+      password: buyerPassword,
+      role: 'BUYER',
+    },
+  })
+
+  const sellerPassword = await bcrypt.hash('seller123', 10)
+  const seller1User = await prisma.user.upsert({
+    where: { email: 'seller@demo.com' },
+    update: {},
+    create: {
+      name: 'Demo Seller',
+      email: 'seller@demo.com',
+      password: sellerPassword,
+      role: 'SELLER',
+    },
+  })
+
+  const seller2Password = await bcrypt.hash('fashion123', 10)
+  const seller2User = await prisma.user.upsert({
+    where: { email: 'hello@fashionhub.example' },
+    update: {},
+    create: {
+      name: 'Fashion Hub Owner',
+      email: 'hello@fashionhub.example',
+      password: seller2Password,
+      role: 'SELLER',
+    },
+  })
+
+  console.log('✅ Demo users created')
 
   // Create Categories
   const electronics = await prisma.category.upsert({
@@ -56,7 +96,7 @@ async function main() {
 
   console.log('✅ Categories created')
 
-  // Create Sellers
+  // Create Sellers (linked to demo users)
   const techStore = await prisma.seller.upsert({
     where: { email: 'contact@techstore.example' },
     update: {},
@@ -65,6 +105,7 @@ async function main() {
       email: 'contact@techstore.example',
       description: 'Your one-stop shop for the latest gadgets and electronics',
       logo: 'https://ui-avatars.com/api/?name=TechStore&background=4F46E5&color=fff',
+      userId: seller1User.id,
     },
   })
 
@@ -76,6 +117,7 @@ async function main() {
       email: 'hello@fashionhub.example',
       description: 'Trendy fashion for every occasion',
       logo: 'https://ui-avatars.com/api/?name=Fashion+Hub&background=EC4899&color=fff',
+      userId: seller2User.id,
     },
   })
 
@@ -101,7 +143,7 @@ async function main() {
     },
   })
 
-  console.log('✅ Sellers created')
+  console.log('✅ Sellers created (2 linked to demo accounts)')
 
   // Create Products
   const products = [

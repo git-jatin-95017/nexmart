@@ -1,0 +1,31 @@
+import Link from 'next/link'
+import { SignUpForm } from '@/components/signup-form'
+
+export default function SignUpPage() {
+  return (
+    <main className="flex min-h-[calc(100vh-4rem)] items-center justify-center bg-gray-50 px-4 py-12">
+      <div className="w-full max-w-md space-y-8">
+        <div className="text-center">
+          <h1 className="text-3xl font-bold text-gray-900">Create Account</h1>
+          <p className="mt-2 text-sm text-gray-600">
+            Join our marketplace as a buyer or seller
+          </p>
+        </div>
+
+        <div className="rounded-lg border bg-white p-8 shadow-sm">
+          <SignUpForm />
+
+          <div className="mt-6 text-center text-sm">
+            <span className="text-gray-600">Already have an account? </span>
+            <Link
+              href="/auth/signin"
+              className="font-medium text-indigo-600 hover:text-indigo-500"
+            >
+              Sign in
+            </Link>
+          </div>
+        </div>
+      </div>
+    </main>
+  )
+}

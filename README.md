@@ -1,13 +1,15 @@
 # E-Commerce Marketplace MVP
 
-A lean multi-seller marketplace web application built with Next.js, TypeScript, Tailwind CSS, and Prisma. Browse products from multiple sellers, add items to your cart, and explore seller storefronts.
+A lean multi-seller marketplace web application built with Next.js, TypeScript, Tailwind CSS, and Prisma. Browse products from multiple sellers, add items to your cart, and explore seller storefronts. Now with full authentication support!
 
 ## Features
 
+- 🔐 **Authentication**: Sign up, sign in, and sign out with secure password hashing
+- 👤 **User Roles**: Buyer, Seller, or Both account types
 - 🏠 **Home Page**: Featured products and category navigation
 - 📂 **Category Browsing**: Browse products by category
 - 🔍 **Product Details**: Detailed product information with add to cart
-- 🛒 **Shopping Cart**: Add, update, and remove items with persistent storage
+- 🛒 **Shopping Cart**: Add, update, and remove items with persistent storage (cookie-based for guests, database for logged-in users)
 - 🏪 **Seller Storefronts**: View products from individual sellers
 - 📱 **Responsive Design**: Mobile-friendly UI with Tailwind CSS
 
@@ -15,6 +17,8 @@ A lean multi-seller marketplace web application built with Next.js, TypeScript, 
 
 - **Framework**: Next.js 16 (App Router)
 - **Language**: TypeScript
+- **Authentication**: Auth.js (NextAuth v5) with Credentials provider
+- **Password Hashing**: bcryptjs
 - **Styling**: Tailwind CSS
 - **Database**: SQLite with Prisma ORM
 - **Icons**: Lucide React
@@ -54,6 +58,28 @@ A lean multi-seller marketplace web application built with Next.js, TypeScript, 
 
 6. **Open your browser** and navigate to `http://localhost:3000`
 
+## Demo Accounts
+
+The seed script creates demo accounts you can use to test authentication:
+
+### Buyer Account
+- **Email**: `buyer@demo.com`
+- **Password**: `buyer123`
+- **Role**: Buyer
+
+### Seller Accounts
+- **Email**: `seller@demo.com`
+- **Password**: `seller123`
+- **Role**: Seller
+- **Store**: TechStore (linked to this account)
+
+- **Email**: `hello@fashionhub.example`
+- **Password**: `fashion123`
+- **Role**: Seller
+- **Store**: Fashion Hub (linked to this account)
+
+You can also create new accounts using the Sign Up page.
+
 ## Available Scripts
 
 - `npm run dev` - Start the development server
@@ -69,7 +95,9 @@ A lean multi-seller marketplace web application built with Next.js, TypeScript, 
 ```
 /
 ├── app/                    # Next.js App Router pages
-│   ├── actions/           # Server actions (cart operations)
+│   ├── actions/           # Server actions (cart + auth operations)
+│   ├── api/auth/          # Auth.js API routes
+│   ├── auth/              # Authentication pages (sign in, sign up)
 │   ├── cart/              # Shopping cart page
 │   ├── categories/        # Category listing and detail pages
 │   ├── products/          # Product detail pages
@@ -81,30 +109,40 @@ A lean multi-seller marketplace web application built with Next.js, TypeScript, 
 │   ├── cart-item.tsx
 │   ├── category-card.tsx
 │   ├── header.tsx
-│   └── product-card.tsx
+│   ├── product-card.tsx
+│   ├── signin-form.tsx
+│   ├── signout-button.tsx
+│   └── signup-form.tsx
 ├── lib/                   # Utility functions
 │   ├── cart.ts           # Cart management utilities
 │   └── prisma.ts         # Prisma client instance
+├── types/                 # TypeScript type definitions
+│   └── next-auth.d.ts    # NextAuth session types
 ├── prisma/               # Database schema and migrations
 │   ├── schema.prisma     # Prisma schema
 │   ├── migrations/       # Database migrations
 │   └── seed.ts           # Database seeding script
+├── auth.ts               # Auth.js configuration
+├── .env                  # Environment variables
 └── package.json
 ```
 
 ## Database Schema
 
-The application uses three main models:
+The application uses the following main models:
 
-- **Seller**: Marketplace sellers with name, description, and contact info
+- **User**: User accounts with email, hashed password, name, and role (BUYER, SELLER, or BOTH)
+- **Seller**: Marketplace sellers with name, description, contact info, and optional User relation
 - **Category**: Product categories (Electronics, Fashion, Home & Living, Sports)
 - **Product**: Products with pricing, stock, images, and relations to sellers and categories
+- **CartItem**: Shopping cart items linked to users (for authenticated users)
 
 ## Demo Data
 
 The seed script populates the database with:
+- 3 demo user accounts (1 buyer, 2 sellers) with documented passwords
 - 4 categories
-- 4 sellers
+- 4 sellers (2 linked to user accounts)
 - 16 products across all categories
 - Featured products on the home page
 
@@ -112,13 +150,27 @@ The seed script populates the database with:
 
 This MVP intentionally excludes:
 - Real payment processing / checkout
-- User authentication / login
+- OAuth providers (GitHub, Google, etc.)
+- Email verification / password reset
 - Admin panel
 - Image uploads (uses placeholder URLs)
 
+## Authentication
+
+The marketplace uses Auth.js (NextAuth v5) with a Credentials provider for authentication:
+
+- Passwords are securely hashed using bcryptjs before storage
+- Sessions are managed with JWT tokens
+- Users can sign up as Buyers, Sellers, or Both
+- When signing up as a Seller, a seller storefront is automatically created
+- The header displays user information and a sign-out button when logged in
+
 ## Cart Implementation
 
-The shopping cart uses cookies for persistence, allowing cart state to survive page refreshes. Cart operations are handled through Next.js Server Actions for seamless updates.
+The shopping cart has dual modes:
+- **Authenticated users**: Cart items are stored in the database and persist across devices
+- **Guest users**: Cart uses cookies for persistence
+- Cart operations are handled through Next.js Server Actions for seamless updates
 
 ## Development Notes
 
