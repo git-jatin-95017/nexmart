@@ -8,7 +8,7 @@ export default function SignInPage() {
         <div className="text-center">
           <h1 className="text-3xl font-bold text-gray-900">Sign In</h1>
           <p className="mt-2 text-sm text-gray-600">
-            Welcome back to the Marketplace
+            Welcome back to NexMart
           </p>
         </div>
 

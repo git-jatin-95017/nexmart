@@ -12,7 +12,7 @@ export async function Header() {
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
             <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-indigo-600 to-purple-600" />
-            <span className="text-xl font-bold">Marketplace</span>
+            <span className="text-xl font-bold">NexMart</span>
           </Link>
 
           <nav className="hidden md:flex md:space-x-6">

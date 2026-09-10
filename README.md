@@ -1,6 +1,6 @@
-# E-Commerce Marketplace MVP
+# NexMart
 
-A lean multi-seller marketplace web application built with Next.js, TypeScript, Tailwind CSS, and Prisma. Browse products from multiple sellers, add items to your cart, explore seller storefronts, and complete purchases with Razorpay payments. Now with full authentication and payment integration!
+A modern multi-seller marketplace built with Next.js, TypeScript, Tailwind CSS, and Prisma. Browse quality products from trusted sellers, manage your cart, explore storefronts, and complete secure payments with Razorpay. Featuring full authentication and integrated payment processing.
 
 ## Features
 

@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Marketplace - Shop from Multiple Sellers",
-  description: "Browse products from multiple sellers in our marketplace",
+  title: "NexMart - Shop from Multiple Sellers",
+  description: "Modern multi-seller marketplace. Browse quality products from trusted sellers.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

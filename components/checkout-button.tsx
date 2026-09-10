@@ -36,7 +36,7 @@ export function CheckoutButton() {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
         amount: result.amount * 100,
         currency: 'INR',
-        name: 'Marketplace',
+        name: 'NexMart',
         description: 'Order Payment',
         order_id: result.razorpayOrderId,
         handler: async function (response: any) {
