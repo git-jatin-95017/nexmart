@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NexMart - Shop from Multiple Sellers",
-  description: "Modern multi-seller marketplace. Browse quality products from trusted sellers.",
+  title: "Haatly - Your Modern Online Haat",
+  description: "Discover quality products from trusted sellers. Experience the warmth of a bustling haat, reimagined for today.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

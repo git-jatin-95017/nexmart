@@ -1,6 +1,6 @@
-# NexMart
+# Haatly
 
-A modern multi-seller marketplace built with Next.js, TypeScript, Tailwind CSS, and Prisma. Browse quality products from trusted sellers, manage your cart, explore storefronts, and complete secure payments with Razorpay. Featuring full authentication and integrated payment processing.
+A modern multi-seller marketplace that brings the warmth of a traditional haat to your screen. Built with Next.js, TypeScript, Tailwind CSS, and Prisma. Browse quality products from trusted sellers, manage your cart, explore unique storefronts, and complete secure payments with Razorpay. Featuring full authentication and integrated payment processing.
 
 ## Features
 
