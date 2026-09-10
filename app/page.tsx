@@ -21,7 +21,7 @@ export default async function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-              Welcome to Haatly
+              Welcome to NexMart
             </h1>
             <p className="mt-4 text-xl text-indigo-100">
               Where every seller has a story and every product finds its home
